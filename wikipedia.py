@@ -1,12 +1,18 @@
-# -*- coding: utf-8 -*-
+#coding=utf-8
+
+from pyvirtualdisplay import Display
+import unittest, time, re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import HtmlTestRunner
-import unittest, time, re
+import xmlrunner
+
+display = Display(visible=0, size=(1024, 768))
+display.start()
+
 
 class WikipediaTestCase(unittest.TestCase):
     def setUp(self):
@@ -32,6 +38,7 @@ class WikipediaTestCase(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+
 if __name__ == "__main__":
     #unittest.main()
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='/home/luc/SeleniumRaport'))
+        unittest.main(testRunner=xmlrunner.XMLTestRunner(output='/var/lib/jenkins/workspace/wikipedia'), failfast=False, buffer=False, catchbreak=False)
